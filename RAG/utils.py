@@ -1,14 +1,16 @@
 import torch
+import numpy as np
+
 
 def cos_similarity(a, b):
     """
     Computes the cosine similarity.
     """
     if not isinstance(a, torch.Tensor):
-        a = torch.tensor(a).float()
+        a = torch.tensor(np.array(a)).float()
 
     if not isinstance(b, torch.Tensor):
-        b = torch.tensor(b).float()
+        b = torch.tensor(np.array(b)).float()
 
     if len(a.shape) == 1:
         a = a.unsqueeze(0)

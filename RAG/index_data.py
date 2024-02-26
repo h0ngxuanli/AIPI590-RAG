@@ -5,6 +5,11 @@ import torch
 from pinecone import Pinecone, ServerlessSpec
 
 def store_embedding(chunks_embedding, chunks, chunks_topic, index_name, API_key):
+    
+    """
+    Stores embeddings with their associated text and topics into a Pinecone index.
+    :return: The created Pinecone index object.
+    """
     pc = Pinecone(api_key=API_key)
     
     pc.create_index(
@@ -17,6 +22,7 @@ def store_embedding(chunks_embedding, chunks, chunks_topic, index_name, API_key)
         ) 
     )
     
+    # index data int pinecone
     index = pc.Index(index_name)
     for i in tqdm(range(len(chunks_embedding))):
         index.upsert(
@@ -31,6 +37,13 @@ def store_embedding(chunks_embedding, chunks, chunks_topic, index_name, API_key)
     return index
 
 def retrieve_all_embedding(index, num_embed):
+    """
+    Retrieves embeddings and their associated metadata from a Pinecone index.
+
+    :return: A Pandas DataFrame containing the embeddings and their associated metadata. 
+             The DataFrame has columns 'id', 'values', and 'text'.
+    """
+    # retrieve embeddings from vector database
     embeddings_data = {"id":[], "values":[], "text":[]}
     embeddings = index.fetch([f'vec_{i}' for i in range(num_embed)])
     for i in range(num_embed):
@@ -42,9 +55,9 @@ def retrieve_all_embedding(index, num_embed):
     return pd.DataFrame(embeddings_data)
 
 
-def retrieve_content(query_embedding, corpus_embeddings, top_k):
-    sim_score = cos_similarity(query_embedding, corpus_embeddings)
+# def retrieve_content(query_embedding, corpus_embeddings, top_k):
+#     sim_score = cos_similarity(query_embedding, corpus_embeddings)
     
-    scores, idxs = torch.topk(sim_score, top_k, dim=1)
+#     scores, idxs = torch.topk(sim_score, top_k, dim=1)
     
-    return {'corpus_id': idxs, 'score': scores}
+#     return {'corpus_id': idxs, 'score': scores}
