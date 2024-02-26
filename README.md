@@ -37,14 +37,14 @@ Machine Learning RAG/
 
 ## Wiki Machine Learning Corpus
 
-We scrape the plain text from Wikipedia with [WikiAPI](https://github.com/lehinevych/MediaWikiAPI). ``Statistics``, ``Artificial intelligence``, ``Computational mathematics``, ``Numerical analysis``, ``Applied mathematics``, ``Probability`` supercategories that include Machine Learning knowledges are selected as text resources. For each category, recursively collect the root pages.
+Scrape the plain text from Wikipedia with [WikiAPI](https://github.com/lehinevych/MediaWikiAPI). ``Statistics``, ``Artificial intelligence``, ``Computational mathematics``, ``Numerical analysis``, ``Applied mathematics``, ``Probability`` supercategories that include Machine Learning knowledges are selected as text resources. For each category, recursively collect the root pages.
 Extract the page contents of the collected wiki URLs Wikipedia-API (~7k pages).
 
 ![wiki_super](./pics/wiki_super.png)
 
 ## MMLU Machine Learning QA subset
 
-We utilize the test set in [MMLU](https://huggingface.co/datasets/lukaemon/mmlu/viewer/machine_learning/train) as our RAG system test set. The train set in it is utilized to as few-shot samples included in the prompt.
+Utilize the test set in [MMLU](https://huggingface.co/datasets/lukaemon/mmlu/viewer/machine_learning/train) as our RAG system test set. The train set in it is utilized to as few-shot samples included in the prompt.
 
 # Pipeline 
 ![MMLU](./pics/pipeline.png)
